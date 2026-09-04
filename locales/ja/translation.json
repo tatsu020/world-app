@@ -774,7 +774,10 @@
             "pinFailed": "リストは作成されましたが、ピン留めに失敗しました。リスト一覧から後でピン留めできます。"
         },
         "subscription": {
-            "addToList": "リストに追加"
+            "addToList": "リストに追加",
+            "createNewList": "新しいリストを作成",
+            "backToLists": "リストに戻る",
+            "addFailed": "リストは作成されましたが、対象を追加できませんでした。もう一度お試しください。"
         },
         "notificationTimeline": {
             "unknown": "不明",
