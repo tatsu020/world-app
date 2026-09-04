@@ -775,7 +775,10 @@
             "pinFailed": "The list was created, but pinning failed. You can pin it later from the list."
         },
         "subscription": {
-            "addToList": "Add to List"
+            "addToList": "Add to List",
+            "createNewList": "Create a new list",
+            "backToLists": "Back to lists",
+            "addFailed": "The list was created, but the item could not be added. Please try again."
         },
         "notificationTimeline": {
             "unknown": "Unknown",
