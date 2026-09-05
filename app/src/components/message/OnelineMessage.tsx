@@ -47,34 +47,38 @@ export const OnelineMessage = (props: MessageProps<MarkdownMessageSchema>) => {
         >
             <CfmRenderer oneline messagebody={message.value.body} emojiDict={message.value.emojis ?? {}} />
             <div style={{ flex: 1 }} />
-            <IconButton
-                onClick={(e) => {
-                    e.stopPropagation()
-                    setMenuOpen(true)
-                }}
-                style={{
-                    padding: 0,
-                    margin: 0,
-                    width: '15px',
-                    height: '15px'
-                }}
-            >
-                <MdMoreHoriz size={15} />
-            </IconButton>
-            <Select
-                open={menuOpen}
-                onClose={() => setMenuOpen(false)}
-                options={[
-                    <ListItem
-                        key="delete"
-                        onClick={() => {
-                            client.api.delete(message.uri).then(() => hapticSuccess())
+            {message.author === client.ccid && (
+                <>
+                    <IconButton
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setMenuOpen(true)
+                        }}
+                        style={{
+                            padding: 0,
+                            margin: 0,
+                            width: '15px',
+                            height: '15px'
                         }}
                     >
-                        <Text>{t('deletePost')}</Text>
-                    </ListItem>
-                ]}
-            />
+                        <MdMoreHoriz size={15} />
+                    </IconButton>
+                    <Select
+                        open={menuOpen}
+                        onClose={() => setMenuOpen(false)}
+                        options={[
+                            <ListItem
+                                key="delete"
+                                onClick={() => {
+                                    client.api.delete(message.uri).then(() => hapticSuccess())
+                                }}
+                            >
+                                <Text>{t('deletePost')}</Text>
+                            </ListItem>
+                        ]}
+                    />
+                </>
+            )}
             <div style={{ flexShrink: 0 }}>
                 <TimeDiff date={props.message.createdAt} />
             </div>

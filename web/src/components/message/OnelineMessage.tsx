@@ -50,39 +50,43 @@ export const OnelineMessage = (props: MessageProps<MarkdownMessageSchema>) => {
         >
             <CfmRenderer oneline messagebody={message.value.body} emojiDict={message.value.emojis ?? {}} />
             <div style={{ flex: 1 }} />
-            <IconButton
-                onClick={(e) => {
-                    e.stopPropagation()
-                    setMenuOpen(true)
-                }}
-                style={
-                    {
-                        padding: 0,
-                        margin: 0,
-                        anchorName: menuAnchor,
-                        width: '15px',
-                        height: '15px'
-                    } as React.CSSProperties
-                }
-            >
-                <MdMoreHoriz size={15} />
-            </IconButton>
-            <Select
-                open={menuOpen}
-                onClose={() => setMenuOpen(false)}
-                options={[
-                    <ListItem
-                        key="delete"
-                        onClick={() => {
-                            client.api.delete(message.uri).then(() => hapticSuccess())
-                            setMenuOpen(false)
+            {message.author === client.ccid && (
+                <>
+                    <IconButton
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setMenuOpen(true)
                         }}
+                        style={
+                            {
+                                padding: 0,
+                                margin: 0,
+                                anchorName: menuAnchor,
+                                width: '15px',
+                                height: '15px'
+                            } as React.CSSProperties
+                        }
                     >
-                        <Text>{t('deletePost')}</Text>
-                    </ListItem>
-                ]}
-                anchor={menuAnchor}
-            />
+                        <MdMoreHoriz size={15} />
+                    </IconButton>
+                    <Select
+                        open={menuOpen}
+                        onClose={() => setMenuOpen(false)}
+                        options={[
+                            <ListItem
+                                key="delete"
+                                onClick={() => {
+                                    client.api.delete(message.uri).then(() => hapticSuccess())
+                                    setMenuOpen(false)
+                                }}
+                            >
+                                <Text>{t('deletePost')}</Text>
+                            </ListItem>
+                        ]}
+                        anchor={menuAnchor}
+                    />
+                </>
+            )}
             <Timestamp
                 onClick={() => {
                     navigate('/post/' + encodeURIComponent(message.uri))
